@@ -1,9 +1,10 @@
 import os
-from dotenv import load_dotenv
-
-# Carga las variables de entorno en memoria
-load_dotenv()  # Cargar todo el contenido de .env en variables de entorno
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    pass
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', '').replace(
+        'postgres://', 'postgresql://') or \
+                              'sqlite:///' + os.path.join(basedir, 'app.db')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
