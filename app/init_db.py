@@ -1,4 +1,4 @@
-from app.models import User, Rutina, Maquina, RutinaMaquinaAssociation
+from app.models import User#, Rutina, Maquina, RutinaMaquinaAssociation
 
 
 def fill_users():
@@ -7,7 +7,7 @@ def fill_users():
     print(u)
     User.insert(u)
 
-
+'''
 def fill_rutinas_maquinas():
     aso_obj = RutinaMaquinaAssociation(rutina_id=1, maquina_id=1, num_ciclo=4, num_repeticiones=20)
     rutina = Rutina(rutina_id=1, rutina_nombre='marzo 2023', fecha_inicial='2023-03-01', fecha_final='2023-04-01')
@@ -27,6 +27,6 @@ def fill_rutinas_maquinas():
 
     print(aso_obj)
     RutinaMaquinaAssociation.insert(aso_obj)
-
+'''
 
 

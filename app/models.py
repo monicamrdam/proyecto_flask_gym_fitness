@@ -54,9 +54,14 @@ class DatosNutricionales(db.Model, BaseModelMixin):
     dieta = db.Column(db.Text, nullable=False)
     user = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
 
-# febrero 2021,  maquina biceps
-# febrero 2021, maquina triceps
-# febrero 2021,  maquina biceps
+
+class RutinaMaquinaAssociation(db.Model, BaseModelMixin):
+    rutina_id = db.Column(db.Integer, db.ForeignKey('rutina.rutina_id'), primary_key=True)
+    maquina_id = db.Column(db.Integer, db.ForeignKey('maquina.maquina_id'), primary_key=True)
+    num_ciclo = db.Column(db.Integer)
+    num_repeticiones = db.Column(db.Integer)
+    rutina = db.relationship('Rutina', back_populates='maquinas')
+    maquina = db.relationship('Maquina', back_populates='rutinas')
 
 
 class Rutina(db.Model, BaseModelMixin):
@@ -76,10 +81,4 @@ class Maquina(db.Model, BaseModelMixin):
     rutinas = db.relationship('RutinaMaquinaAssociation', back_populates='maquina')
 
 
-class RutinaMaquinaAssociation(db.Model, BaseModelMixin):
-    rutina_id = db.Column(db.Integer, db.ForeignKey('Rutina.rutina_id'), primary_key=True)
-    maquina_id = db.Column(db.Integer, db.ForeignKey('Maquina.maquina_id'), primary_key=True)
-    rutina = db.relationship('Rutina', back_populates='maquinas')
-    maquina = db.relationship('Maquina', back_populates='rutinas')
-    num_ciclo = db.Column(db.Integer)
-    num_repeticiones = db.Column(db.Integer)
+
