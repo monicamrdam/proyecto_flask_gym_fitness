@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_migrate import Migrate
+from flask_login import LoginManager
 from app.models import db
 from app.init_db import fill_users
 from config import Config
@@ -13,6 +14,7 @@ db.create_all()
 # Fill DB
 fill_users()
 
+login = LoginManager(app)
 migrate = Migrate(app, db)
 
 from app import routes
