@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for
 from flask_login import current_user, login_user
 from app import app, login
-from app.forms import LoginForm
+from app.forms import LoginForm, RegisterForm
 from app.models import User
 
 
@@ -41,3 +41,21 @@ def login():
         else:
             print('Mensaje de error ')
     return render_template('login.html', form=form)
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
+    # Crearemos el formulario
+    form = RegisterForm()
+
+    # Validar el formulario
+    if form.validate_on_submit():
+        # Crear un nuevo usuario
+        print('Los datos del formulario son correctos')
+        return redirect(url_for('login'))
+    else:
+        print('validacion incorrecta')
+    return render_template('register.html', form=form)

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.username }} <br>
+            {% for error in form.username.errors %}
+                <span style="color: red">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.email }} <br>
+            {% for error in form.email.errors %}
+                <span style="color: red">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.password }} <br>
+            {% for error in form.password.errors %}
+                <span style="color: red">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.password2 }} <br>
+            {% for error in form.password2.errors %}
+                <span style="color: red">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+</body>
+</html>
