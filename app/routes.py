@@ -5,6 +5,15 @@ from app.forms import LoginForm, RegisterForm
 from app.models import User
 from flask_login import login_required, logout_user
 
+'''
+Vistas
+
+- Vista insertar datos biometricos (formulario)
+- Vista historico datos biometricos
+- Vista insertar dieta (formulario)
+- Vista lista de dietas
+- Vista seleccion rutinas disponibles
+'''
 
 @login.user_loader
 def load_user(id):
