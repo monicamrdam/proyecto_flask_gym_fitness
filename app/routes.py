@@ -3,6 +3,7 @@ from flask_login import current_user, login_user
 from app import app, login
 from app.forms import LoginForm, RegisterForm
 from app.models import User
+from flask_login import login_required, logout_user
 
 
 @login.user_loader
@@ -28,7 +29,9 @@ def login():
     if form.validate_on_submit():
         # el usuario con ese username existe
         # la contraseña es correcta
-        user = User.filter_by(usuario=form.username.data).first()
+        print(form.username.data)
+        user = User.query.filter_by(usuario=form.username.data).first()
+        print(user)
 
         # el usuario existe
         if user is not None:
@@ -37,9 +40,11 @@ def login():
                 login_user(user, remember=form.remember_me.data)
                 return redirect(url_for('index'))
             else:
-                print('Mensaje de error')
+                print('contraseña incorrecta')
         else:
-            print('Mensaje de error ')
+            print('usuario no existe')
+    else:
+        print('error validacion')
     return render_template('login.html', form=form)
 
 
@@ -54,8 +59,16 @@ def register():
     # Validar el formulario
     if form.validate_on_submit():
         # Crear un nuevo usuario
-        print('Los datos del formulario son correctos')
+        user = User(usuario=form.username.data, mail=form.email.data, nombre=form.nombre.data,
+                    apellido=form.apellido.data)
+        print(user)
+        user.set_password(form.password.data)
+        User.insert(user)
         return redirect(url_for('login'))
-    else:
-        print('validacion incorrecta')
     return render_template('register.html', form=form)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('login'))

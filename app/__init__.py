@@ -10,10 +10,12 @@ app.app_context().push()
 app.config.from_object(Config)
 db.init_app(app)
 
+'''
 db.drop_all()
 db.create_all()
 # Fill DB
 fill_users()
+'''
 
 login = LoginManager(app)
 migrate = Migrate(app, db)

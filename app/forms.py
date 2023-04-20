@@ -14,14 +14,15 @@ class LoginForm(FlaskForm):
 
 class RegisterForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()], render_kw={"placeholder": "username"})
-
     email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "email"})
+
+    nombre = StringField('Nombre', validators=[DataRequired()], render_kw={"placeholder": "name"})
+    apellido = StringField('Primer apellido', render_kw={"placeholder": "surname"})
 
     password = PasswordField('password', validators=[DataRequired(), EqualTo('password2')],
                              render_kw={"placeholder": "password"})
     password2 = PasswordField('confirm password', validators=[DataRequired()],
                               render_kw={"placeholder": "confirm password"})
-
     submit = SubmitField('Register')
 
     def validate_username(self, username):

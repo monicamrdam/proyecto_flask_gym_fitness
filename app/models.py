@@ -28,7 +28,7 @@ class BaseModelMixin:
 
 
 class User(UserMixin, db.Model, BaseModelMixin):
-    user_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100), nullable=False)
     apellido = db.Column(db.String(100))
     usuario = db.Column(db.String(100), nullable=False)
@@ -39,7 +39,7 @@ class User(UserMixin, db.Model, BaseModelMixin):
     rutinas = db.relationship('Rutina', backref='user_associated_rutina', lazy=True)
 
     def __repr__(self):
-        return 'User id: {}, nombre: {}, mail: {}'.format(self.user_id, self.nombre, self.mail)
+        return 'User id: {}, nombre: {}, mail: {}'.format(self.id, self.nombre, self.mail)
 
     def set_password(self, password):
         self.hash_password = generate_password_hash(password)
@@ -53,14 +53,14 @@ class DatosBiometricos(db.Model, BaseModelMixin):
     peso = db.Column(db.Float(10, 2), nullable=False)
     altura = db.Column(db.Float(10, 2), nullable=False)
     fecha = db.Column(db.DateTime, nullable=False)
-    user = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 
 class DatosNutricionales(db.Model, BaseModelMixin):
     id = db.Column(db.Integer, primary_key=True)
     fecha = db.Column(db.DateTime, nullable=False)
     dieta = db.Column(db.Text, nullable=False)
-    user = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 
 class RutinaMaquinaAssociation(db.Model, BaseModelMixin):
@@ -77,7 +77,7 @@ class Rutina(db.Model, BaseModelMixin):
     rutina_nombre = db.Column(db.String(100))
     fecha_inicial = db.Column(db.DateTime, nullable=False)
     fecha_final = db.Column(db.DateTime, nullable=False)
-    user = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     maquinas = db.relationship('RutinaMaquinaAssociation', back_populates='rutina')
 
 
