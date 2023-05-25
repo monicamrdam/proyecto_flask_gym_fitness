@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <section>
+        <div class="frmregistrarse">
+            <form action="" class="formulario" method="post" novalidate>
+                {{ form.hidden_tag() }}
+
+              <h1 class="titulo">Registrarse</h1>
+    
+              <div class="contenedor">
+                {{ form.username(class_="input", placeholder="a") }}
+                {% for error in form.username.errors %}
+                    <span style="color: red">{{ error }}</span>
+                {% endfor %}
+                <label for="" class="label">Username</label>
+              </div>
+        
+              <div class="contenedor">
+                  {{ form.nombre(class_="input", placeholder="a") }}
+                  {% for error in form.nombre.errors %}
+                    <span style="color: red">{{ error }}</span>
+                  {% endfor %}
+                <label for="" class="label">Nombre</label>
+              </div>
+
+              <div class="contenedor">
+                {{ form.apellido(class_="input", placeholder="a") }}
+                {% for error in form.apellido.errors %}
+                    <span style="color: red">{{ error }}</span>
+                {% endfor %}
+                <label for="" class="label">Apellidos</label>
+              </div>
+        
+              <div class="contenedor">
+                 {{ form.email(class_="input", placeholder="a") }}
+                 {% for error in form.email.errors %}
+                    <span style="color: red">{{ error }}</span>
+                 {% endfor %}
+                <label for="" class="label">Email</label>
+              </div>
+
+              <div class="contenedor">
+                {{ form.password(class_="input", placeholder="a") }}
+                {% for error in form.password.errors %}
+                    <span style="color: red">{{ error }}</span>
+                {% endfor %}
+                <label for="" class="label">Contraseña</label>
+              </div>
+        
+              <div class="contenedor">
+                {{ form.password2(class_="input", placeholder="a") }}
+                {% for error in form.password2.errors %}
+                    <span style="color: red">{{ error }}</span>
+                {% endfor %}
+                <label for="" class="label">Confirmar contraseña</label>
+              </div>
+
+                {{ form.submit(class_="submitBtn") }}
+            </form>
+          </div>
+    </section>  
+{% endblock %}

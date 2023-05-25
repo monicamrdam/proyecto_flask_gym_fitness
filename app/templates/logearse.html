@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <section>
+        <div class="frmregistrarse">
+            <form action="" class="formulario" method="post" novalidate>
+                {{ form.hidden_tag() }}
+
+              <h1 class="titulo">Logearse</h1>
+    
+              <div class="contenedor">
+                  {{ form.username(class_="input", placeholder="a") }}
+                  {% for error in form.username.errors %}
+                    <span style="color: red">{{ error }}</span>
+                  {% endfor %}
+                <label for="" class="label">Username</label>
+              </div>
+        
+              <div class="contenedor">
+                {{ form.password(class_="input", placeholder="a") }}
+                {% for error in form.password.errors %}
+                    <span style="color: red">{{ error }}</span>
+                {% endfor %}
+                <label for="" class="label">Contraseña</label>
+              </div>
+
+              <div class="contenedor_chekbox">
+                  {{ form.remember_me(class_="input_chekbox", placeholder="a") }}
+                <label for="" class="label">Recordar</label>
+              </div>
+
+                {{ form.submit(class_="submitBtn") }}
+            </form>
+          </div>
+    </section>  
+{% endblock %}

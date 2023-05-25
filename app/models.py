@@ -22,10 +22,6 @@ class BaseModelMixin:
     def get_by_id(cls, id):
         return cls.query.get(id)
 
-    @classmethod
-    def simple_filter(cls, **kwargs):
-        return cls.query.filter_by(**kwargs).all()
-
 
 class User(UserMixin, db.Model, BaseModelMixin):
     id = db.Column(db.Integer, primary_key=True)

@@ -54,7 +54,8 @@ def login():
             print('usuario no existe')
     else:
         print('error validacion')
-    return render_template('login.html', form=form)
+    print(form.errors)
+    return render_template('logearse.html', form=form)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -74,7 +75,8 @@ def register():
         user.set_password(form.password.data)
         User.insert(user)
         return redirect(url_for('login'))
-    return render_template('register.html', form=form)
+    print(form.errors)
+    return render_template('registro.html', form=form)
 
 
 @app.route('/logout')
